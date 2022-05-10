@@ -4,13 +4,11 @@ using WebApplication2.Data;
 using WebApplication2.Data.Entities;
 using WebApplication2.Services;
 
-namespace WebApplication2.Pages
+namespace WebApplication2.Pages.Polls
 {
     public class PollModel : PageModel
     {
         public Poll Poll { get; set; }
-
-        public List<Poll> Polls { get; set; }
 
         private readonly IPollService _service;
 
@@ -19,25 +17,23 @@ namespace WebApplication2.Pages
             _service = service;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Polls = await _service.GetPollAsync();
+            Poll = await _service.GetPollByIdAsync(id);
             return Page();
         }
 
-        public IActionResult OnPost(Poll Poll)
+        public IActionResult OnPost(Answer answer)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _service.AddPoll(Poll);
+            //WTF?
+            answer.Id = 0;
 
-            return RedirectToPage("/Polls");
+            _service.AddAnswer(answer);
+
+            return Redirect($"/polls/{answer.PollId}");
         }
-    }
-
-    public class PollViewModel
-    {
-        public List<string> Answers { get; set; } = new List<string> { "Ja", "Nein" };
     }
 }

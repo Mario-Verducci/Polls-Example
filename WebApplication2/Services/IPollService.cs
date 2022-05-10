@@ -7,8 +7,8 @@ namespace WebApplication2.Services
     {
         Task AddAnswer(Answer answer);
         Task AddPoll(Poll poll);
-        Task DeleteAnswer(Answer answer);
-        Task DeletePoll(Poll poll);
+        Task DeleteAnswer(int id);
+        Task DeletePoll(int id);
         Task<List<Poll>> GetPollAsync();
         Task<Poll> GetPollByIdAsync(int id);
         Task UpdateAnswer(Answer answer);

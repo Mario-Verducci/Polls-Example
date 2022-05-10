@@ -1,5 +1,5 @@
 ﻿@page "/polls"
-@model PollModel
+@model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
@@ -34,10 +34,28 @@
                     <tr class='clickable-row' data-href='#'>
                         <td>@poll.Name</td>
                         <td>@poll.Question</td>
-                        <td>@poll.Answers?.Count</td>
+                        <td>
+                            @foreach (var answer in @poll.Answers)
+                            {
+                                <input class="form-control form-control-sm mb-1" value="@answer.AnswerText" />
+                                <form method="post">
+                                    <input name="answerId" type="hidden" value="@answer.Id" />
+                                    <button asp-page-handler="DeleteAnswer" type="submit" class="btn btn-primary">Remove</button>
+                                </form>
+                            }
+                            <form method="post">
+                                <input name="pollId" type="hidden" value="@poll.Id" />
+                                <input name="answer" class="form-control form-control-sm mb-1" placeholder="Type a new answer..." />
+                                <button asp-page-handler="Answer" type="submit" class="btn btn-primary">Add</button>
+                            </form>
+
+                        </td>
                         <td>@poll.Votes?.Count</td>
                         <td align="right">
-                            <a href="/polls/@poll.Id" class="btn btn-primary">Edit</a>
+                            <form method="post">
+                                <input name="pollId" type="hidden" value="@poll.Id" />
+                                <button asp-page-handler="DeletePoll" type="submit" class="btn btn-primary">Remove</button>
+                            </form>
                         </td>
                     </tr>
                 }

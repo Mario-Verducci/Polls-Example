@@ -36,10 +36,14 @@ namespace WebApplication2.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeletePoll(Poll poll)
+        public async Task DeletePoll(int pollId)
         {
-            _context.Polls.Remove(poll);
-            await _context.SaveChangesAsync();
+            var dbEntry = _context.Polls.FirstOrDefault(x => x.Id == pollId);
+            if (dbEntry != null)
+            {
+                _context.Polls.Remove(dbEntry);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task AddAnswer(Answer answer)
@@ -54,10 +58,14 @@ namespace WebApplication2.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAnswer(Answer answer)
+        public async Task DeleteAnswer(int answerId)
         {
-            _context.Answers.Remove(answer);
-            await _context.SaveChangesAsync();
+            var dbEntry = _context.Answers.FirstOrDefault(x => x.Id == answerId);
+            if (dbEntry != null)
+            {
+                _context.Answers.Remove(dbEntry);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task Vote(Vote vote)
