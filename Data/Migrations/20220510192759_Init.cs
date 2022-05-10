@@ -70,7 +70,7 @@ namespace Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     PollId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Text = table.Column<string>(type: "TEXT", nullable: true),
+                    Text = table.Column<string>(type: "TEXT", nullable: false),
                     CommentDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
