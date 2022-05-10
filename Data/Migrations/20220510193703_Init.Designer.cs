@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(PollContext))]
-    [Migration("20220510192759_Init")]
+    [Migration("20220510193703_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,9 +80,11 @@ namespace Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Question")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("PollId");

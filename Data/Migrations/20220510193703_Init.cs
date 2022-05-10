@@ -15,10 +15,10 @@ namespace Data.Migrations
                 {
                     PollId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Image = table.Column<string>(type: "TEXT", nullable: true),
-                    Question = table.Column<string>(type: "TEXT", nullable: true)
+                    Question = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

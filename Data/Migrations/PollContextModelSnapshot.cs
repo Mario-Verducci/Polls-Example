@@ -78,9 +78,11 @@ namespace Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Question")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("PollId");
