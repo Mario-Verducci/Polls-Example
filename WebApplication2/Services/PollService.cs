@@ -13,9 +13,16 @@ namespace WebApplication2.Services
             _context = context;
         }
 
-        public async Task<List<Poll>> GetPollAsync() => await _context.Polls.Include(x => x.Answers).Include(x => x.Votes).ToListAsync();
+        public async Task<List<Poll>> GetPollAsync()
+            => await _context.Polls
+            .Include(x => x.Answers)
+            .Include(x => x.Votes)
+            .ToListAsync();
 
-        public async Task<Poll> GetPollByIdAsync(int id) => await _context.Polls.Include(x => x.Answers).FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<Poll> GetPollByIdAsync(int id)
+            => await _context.Polls
+            .Include(x => x.Answers)
+            .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task AddPoll(Poll poll)
         {

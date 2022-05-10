@@ -11,21 +11,4 @@ public class PollContext : DbContext
     public DbSet<User> Users { get; set; }
 
     public PollContext(DbContextOptions<PollContext> options) : base(options) { }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Poll>()
-            .HasMany(x => x.Answers)
-            .WithOne(x => x.Poll)
-            .HasForeignKey(x => x.PollId);
-
-        modelBuilder.Entity<Poll>()
-            .HasMany(x => x.Votes)
-            .WithOne(x => x.Poll)
-            .HasForeignKey(x => x.PollId);
-
-        modelBuilder.Entity<Vote>()
-            .HasIndex(x => new { x.UserId, x.PollId })
-            .IsUnique();
-    }
 }
