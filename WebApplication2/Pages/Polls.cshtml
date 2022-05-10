@@ -1,0 +1,49 @@
+﻿@page "/polls"
+@model PollModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="row">
+    <div class="col-sm-3">
+        <form method="post">
+            <label for="Name" class="form-label">Name</label>
+            <input class="form-control form-control-sm mb-1" type="text" name="Name" />
+
+            <label for="Question" class="form-label">Question</label>
+            <input class="form-control form-control-sm mb-1" type="text" name="Question" />
+            <div class="d-grid gap-2">
+                <button class="btn btn-success mt-1 btn" type="submit">Add new Poll</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-9">
+        <table class="table table-hover table-striped table-sm">
+            <thead class="fw-bold table-primary">
+                <tr>
+                    <td width="30%">Title</td>
+                    <td>Question</td>
+                    <td>Answers</td>
+                    <td>Votes</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var poll in Model.Polls)
+                {
+                    <tr class='clickable-row' data-href='#'>
+                        <td>@poll.Name</td>
+                        <td>@poll.Question</td>
+                        <td>@poll.Answers?.Count</td>
+                        <td>@poll.Votes?.Count</td>
+                        <td align="right">
+                            <a href="/polls/@poll.Id" class="btn btn-primary">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
