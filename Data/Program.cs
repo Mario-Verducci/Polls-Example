@@ -75,7 +75,12 @@ foreach (var poll in dbPolls)
         position = Console.GetCursorPosition();
 
         Console.SetCursorPosition(75, position.Top);
+
+        Console.ForegroundColor = votes>=0? ConsoleColor.Green : ConsoleColor.White;
+
         Console.Write($"( {votes} )");
+
+        Console.ForegroundColor = ConsoleColor.White;
 
         Console.WriteLine();
     }
