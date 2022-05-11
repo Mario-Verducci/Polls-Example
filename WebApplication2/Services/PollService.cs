@@ -52,10 +52,14 @@ namespace WebApplication2.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAnswer(Answer answer)
+        public async Task UpdateAnswer(int id, string answerText)
         {
-            _context.Answers.Update(answer);
-            await _context.SaveChangesAsync();
+            var dbEntry = await _context.Answers.FirstOrDefaultAsync(x => x.Id == id);
+            if(dbEntry != null)
+            {
+                dbEntry.AnswerText = answerText;
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteAnswer(int answerId)

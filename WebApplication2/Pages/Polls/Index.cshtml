@@ -18,44 +18,49 @@
     </div>
 
     <div class="col-sm-9">
-        <table class="table table-hover table-striped table-sm">
+        <table class="table table-striped table-sm" style="border-collapse:separate;border-spacing:0.5em;">
             <thead class="fw-bold table-primary">
                 <tr>
                     <td width="30%">Title</td>
                     <td>Question</td>
                     <td>Answers</td>
-                    <td>Votes</td>
-                    <td></td>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var poll in Model.Polls)
                 {
-                    <tr class='clickable-row' data-href='#'>
-                        <td>@poll.Name</td>
-                        <td>@poll.Question</td>
+                    <tr>
+                        <td>
+                            <input class="form-control form-control-sm" value="@poll.Name" />
+                            <form method="post">
+                                <div class="mb-2">
+                                    <input name="pollId" type="hidden" value="@poll.Id" />
+                                </div>
+                                <button asp-page-handler="DeletePoll" type="submit" class="me-2 btn btn-sm btn-secondary">Update Poll</button>
+                                <button asp-page-handler="DeletePoll" type="submit" class="me-2 btn btn-sm btn-danger">Remove Poll</button>
+                            </form>
+                        </td>
+                        <td><input class="form-control form-control-sm" value="@poll.Question" /></td>
                         <td>
                             @foreach (var answer in @poll.Answers)
                             {
-                                <input class="form-control form-control-sm mb-1" value="@answer.AnswerText" />
-                                <form method="post">
+                                <form method="post" class="mb-3">
                                     <input name="answerId" type="hidden" value="@answer.Id" />
-                                    <button asp-page-handler="DeleteAnswer" type="submit" class="btn btn-primary">Remove</button>
+
+                                    <div class="d-flex flex-row-reverse bd-highlight">
+                                        <button asp-page-handler="DeleteAnswer" type="submit" class="btn btn-sm btn-danger">remove</button>
+                                        <input name="answerText" class="form-control form-control-sm mb-1" value="@answer.AnswerText" />
+                                    </div>
+
+                                    <button asp-page-handler="UpdateAnswer" type="submit" class="btn btn-sm btn-secondary">Update</button>
                                 </form>
                             }
                             <form method="post">
                                 <input name="pollId" type="hidden" value="@poll.Id" />
                                 <input name="answer" class="form-control form-control-sm mb-1" placeholder="Type a new answer..." />
-                                <button asp-page-handler="Answer" type="submit" class="btn btn-primary">Add</button>
+                                <button asp-page-handler="Answer" type="submit" class="btn btn-sm btn-success">Add new Answer</button>
                             </form>
 
-                        </td>
-                        <td>@poll.Votes?.Count</td>
-                        <td align="right">
-                            <form method="post">
-                                <input name="pollId" type="hidden" value="@poll.Id" />
-                                <button asp-page-handler="DeletePoll" type="submit" class="btn btn-primary">Remove</button>
-                            </form>
                         </td>
                     </tr>
                 }

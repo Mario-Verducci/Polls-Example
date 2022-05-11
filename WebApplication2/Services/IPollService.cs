@@ -11,7 +11,7 @@ namespace WebApplication2.Services
         Task DeletePoll(int id);
         Task<List<Poll>> GetPollAsync();
         Task<Poll> GetPollByIdAsync(int id);
-        Task UpdateAnswer(Answer answer);
+        Task UpdateAnswer(int id, string answerText);
         Task UpdatePoll(Poll poll);
         Task Vote(Vote vote);
     }

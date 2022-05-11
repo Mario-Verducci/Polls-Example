@@ -47,6 +47,12 @@ namespace WebApplication2.Pages.Polls
             return RedirectToPage("/Polls/Index");
         }
 
+        public IActionResult OnPostUpdateAnswer(int answerId, string answerText)
+        {
+            _service.UpdateAnswer(answerId, answerText);
+            return RedirectToPage("/Polls/Index");
+        }
+
         public IActionResult OnPostDeleteAnswer(int answerId)
         {
             _service.DeleteAnswer(answerId);
